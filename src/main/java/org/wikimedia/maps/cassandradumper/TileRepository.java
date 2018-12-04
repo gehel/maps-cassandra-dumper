@@ -1,6 +1,15 @@
 package org.wikimedia.maps.cassandradumper;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
+import java.util.stream.Stream;
 
-public interface TileRepository extends CrudRepository<> {
+import org.springframework.data.cassandra.repository.CassandraRepository;
+import org.springframework.data.cassandra.repository.Query;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface TileRepository extends CassandraRepository<Tile, Tile.Key> {
+
+    @Query("select * from tiles")
+    Stream<Tile> findAllTiles();
 }
