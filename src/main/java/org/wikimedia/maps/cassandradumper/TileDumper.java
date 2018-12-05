@@ -19,11 +19,11 @@ public class TileDumper {
     }
 
     public void dump() {
-        repository.findAllTiles().forEach(tile -> write(tile));
+        repository.findAllTiles().forEach(this::write);
     }
 
     @SneakyThrows
-    private CQLSSTableWriter write(Tile tile) {
-        return writer.addRow(tile.getZoom(), tile.getBlock(), tile.getIdx(), tile.getTile());
+    private void write(Tile tile) {
+        writer.addRow(tile.getZoom(), tile.getBlock(), tile.getIdx(), tile.getTile());
     }
 }

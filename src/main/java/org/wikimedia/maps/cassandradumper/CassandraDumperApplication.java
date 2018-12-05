@@ -1,6 +1,12 @@
 package org.wikimedia.maps.cassandradumper;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import org.apache.cassandra.io.sstable.CQLSSTableWriter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -24,11 +30,19 @@ public class CassandraDumperApplication {
 			"INSERT INTO v4.tiles (zoom, block, idx, tile)" +
             "  VALUES (?, ?, ?, ?)";
 
+	@Value("${dumper.output.dir}")
+	private Path outputDir;
+
 	@Bean
-	public CQLSSTableWriter cqlssTableWriter() {
+	public CQLSSTableWriter cqlssTableWriter(
+
+	) throws IOException {
+		if (!Files.exists(outputDir)) Files.createDirectories(outputDir);
+		if (!Files.isDirectory(outputDir)) throw new IllegalArgumentException("Output dir needs to be a directory");
+
 		return CQLSSTableWriter.builder()
 				.forTable(SCHEMA)
-				.inDirectory("/tmp/test")
+				.inDirectory(outputDir.toFile())
 				.using(INSERT)
 				.withBufferSizeInMB(128)
 				.build();

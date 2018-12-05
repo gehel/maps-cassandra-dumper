@@ -17,6 +17,11 @@
 	<name>cassandra-dumper</name>
 	<description>Dump maps tiles from Cassandra</description>
 
+	<properties>
+		<cassandra.version>2.2.6</cassandra.version>
+		<cassandra-driver.version>3.6.0</cassandra-driver.version>
+	</properties>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
