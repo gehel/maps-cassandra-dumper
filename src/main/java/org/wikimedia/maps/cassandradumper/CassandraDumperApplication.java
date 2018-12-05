@@ -33,9 +33,7 @@ public class CassandraDumperApplication {
 	private Path outputDir;
 
 	@Bean
-	public CQLSSTableWriter cqlssTableWriter(
-
-	) throws IOException {
+	public CQLSSTableWriter cqlssTableWriter() throws IOException {
 		if (!Files.exists(outputDir)) Files.createDirectories(outputDir);
 		if (!Files.isDirectory(outputDir)) throw new IllegalArgumentException("Output dir needs to be a directory");
 
