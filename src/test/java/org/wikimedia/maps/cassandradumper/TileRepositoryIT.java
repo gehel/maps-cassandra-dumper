@@ -6,17 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import de.thetaphi.forbiddenapis.SuppressForbidden;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TileRepositoryTest {
+public class TileRepositoryIT {
 
     @Autowired
     private TileRepository repository;
 
-    @Test
+    @Test @SuppressForbidden
     public void test() {
-        repository.findAllTiles().forEach(t -> {
-            System.out.println(t);
-        });
+        repository.findAllTiles().forEach(System.out::println);
     }
 }

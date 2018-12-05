@@ -4,10 +4,8 @@ import static org.springframework.data.cassandra.core.cql.PrimaryKeyType.CLUSTER
 import static org.springframework.data.cassandra.core.cql.PrimaryKeyType.PARTITIONED;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.nio.ByteBuffer;
 
-import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyClass;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
